@@ -221,7 +221,9 @@ Many linting options available. I recommend airbnb
 ## CI
 
 [CircleCI](https://circleci.com/)
+
 [Travis-CI](https://travis-ci.org/)
+
 [CodeShip](https://codeship.com/)
 
 ...and tons more
@@ -235,6 +237,7 @@ Need approval from higher ups.
 ## NPM or Yarn
 
 [NPM](https://www.npmjs.com/)
+
 [Yarn](https://yarnpkg.com/en/)
 
 Security [concerns](http://blog.npmjs.org/post/141702881055/package-install-scripts-vulnerability) with NPM.
@@ -252,14 +255,14 @@ and then pull request that branch back into develop when done. After it is peer
 reviewed, it will be merged or commented upon.
 
 #### Branch naming
-master
-develop
-feat/add-example or feature/add-example
-fix/correct-example-bug
+- master
+- develop
+- feat/add-example or feature/add-example
+- fix/correct-example-bug
 
-#### Commit messages relate to semanatic release use [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md) standards
+#### Commit messages relate to semantic release use [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md) standards
 
-Example:
+Examples:
 
 - feat: add login page
 - fix: remove spurious re-renders
