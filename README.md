@@ -263,7 +263,7 @@ actions/, etc.).
 #### Some code examples
 
 Separated by file type with component individual directories
-'''
+```
 /src
   /actions
     /notifications.js
@@ -285,10 +285,10 @@ Separated by file type with component individual directories
     /notifications.scss
   /utils
   index.js
-'''
+```
 
 Separated by file type with css encapsulated
-'''
+```
 /src
   /actions
     /notifications.js
@@ -308,10 +308,10 @@ Separated by file type with css encapsulated
     /notifications.js
   /utils
   index.js
-'''
+```
 
 Separated by file type with flat components
-'''
+```
 /src
   /actions
     /notifications.js
@@ -331,7 +331,7 @@ Separated by file type with flat components
     notifications.scss
   /utils
   index.js
-'''
+```
 
 ### Feature/Pods
 
@@ -344,7 +344,7 @@ are concerned with (i.e. authentication, comments, profiles)
 #### Some code examples
 
 Separates files by what feature or pod they are concerned with
-'''
+```
 app/
   app.jsx
   authentication/
@@ -355,7 +355,7 @@ app/
     commentsContainer.jsx
     actions/
     ...
-'''
+```
 
 ### Domain/view/route
 
@@ -367,7 +367,7 @@ is narrowly focused on splitting code into the views and routes that are used
 
 #### Some code examples
 
-'''
+```
 app/
   app.jsx
   authentication/
@@ -378,7 +378,7 @@ app/
     commentsContainer.jsx
     actions/
     ...
-'''
+```
 
 #### Extra articles
 - (https://medium.com/@msandin/strategies-for-organizing-code-2c9d690b6f33)
