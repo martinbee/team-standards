@@ -60,7 +60,7 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   selectedValues: [],
-  selectedValues: () => console.log('this is a function'),
+  onKeyChange: () => console.log('this is a function'),
 };
 
 export default Dropdown;
@@ -70,13 +70,13 @@ With initializers and fat arrow methods
 ```javascript
 export default class Dropdown extends PureComponent {
   static propTypes = {
-    selectableKeys: arrayOf(string).isRequired,
-    onKeyChange: func.isRequired,
+    selectableKeys: arrayOf(string),
+    onKeyChange: func,
   };
 
   static defaultProps = {
     selectedValues: [],
-    selectedValues: () => console.log('this is a function'),
+    onKeyChange: () => console.log('this is a function'),
   };
 
   state = { selectedValues: [] };
