@@ -2,7 +2,7 @@
 
 ## React Code
 
-#### ES6 classes
+#### ES6 classes vs React.createClass (article on differences: https://toddmotto.com/react-create-class-versus-component/)
 
 Pre es6 React.createClass ('this' is autobound)
 ```javascript
@@ -54,7 +54,7 @@ Contacts.defaultProps = {};
 export default Contacts;
 ```
 
-#### Prefer stateless functional components when possible
+#### Prefer stateless functional components when possible ([Benefits](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc))
 
 Non-functional component without state
 ```javascript
@@ -76,7 +76,7 @@ const Contacts = props => <div>{props.thing}</div>;
 export default Contacts;
 ```
 
-#### Use container/presentational component paradigm [Dan Abramov Article](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+#### Use container/presentational component paradigm ([Dan Abramov Article](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0))
 
 Logic and presentation in one component
 ```javascript
@@ -216,7 +216,24 @@ export default class Dropdown extends PureComponent {
 
 ## Linting
 
-Many linting options available. I recommend airbnb
+Many linting options are available. I recommend using [eslint](https://github.com/eslint/eslint) with [airbnb](https://github.com/airbnb/javascript) using [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb).
+
+Eslint can be enabled for most IDEs/text editors
+- [Webstorm](https://www.jetbrains.com/help/webstorm/2017.1/eslint.html)
+- [Atom](http://www.acuriousanimal.com/2016/08/14/configuring-atom-with-eslint.html)
+- [Vim](http://remarkablemark.org/blog/2016/09/28/vim-syntastic-eslint/)
+
+Airbnb's [style guide](https://github.com/airbnb/javascript) is wildly popular
+and contains some useful standards. So far the rules that I am disabling are:
+
+```javascript
+"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+"react/require-default-props": 0,
+"spaced-comment": 0
+```
+
+Regardless of the standard we follow, if, while developing, we come across some
+rules that we think are ridiculous, we can discuss modifying/disabling them.
 
 ## CI
 
