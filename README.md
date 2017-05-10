@@ -216,7 +216,17 @@ export default class Dropdown extends PureComponent {
 
 ## Linting
 
+Many linting options available. I recommend airbnb
+
 ## CI
+
+[CircleCI](https://circleci.com/)
+[Travis-CI](https://travis-ci.org/)
+[CodeShip](https://codeship.com/)
+
+...and tons more
+
+Need approval from higher ups.
 
 ## Testing
 
@@ -224,11 +234,35 @@ export default class Dropdown extends PureComponent {
 
 ## NPM or Yarn
 
+[NPM](https://www.npmjs.com/)
+[Yarn](https://yarnpkg.com/en/)
+
+Security [concerns](http://blog.npmjs.org/post/141702881055/package-install-scripts-vulnerability) with NPM.
+
 #### Use [semantic release](https://github.com/semantic-release/semantic-release)
+
+Instead of writing meaningless commit messages, we can take our time to think about the changes in the codebase and write them down. Following formalized conventions it is then possible to generate a helpful changelog and to derive the next semantic version number from them.
+
+When semantic-release is setup it will do that after every successful continuous integration build of your master branch (or any other branch you specify) and publish the new version for you. This way no human is directly involved in the release process and your releases are guaranteed to be unromantic and unsentimental.
 
 ## Github Standards
 
-#### Branch naming
+When working on a story, branch off of develop (using branch naming conventions)
+and then pull request that branch back into develop when done. After it is peer
+reviewed, it will be merged or commented upon.
 
+#### Branch naming
+master
+develop
+feat/add-example or feature/add-example
+fix/correct-example-bug
 
 #### Commit messages relate to semanatic release use [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md) standards
+
+Example:
+
+- feat: add login page
+- fix: remove spurious re-renders
+- perf(pencil): remove graphiteWidth option
+- style: change margin
+- docs: update commit message section
