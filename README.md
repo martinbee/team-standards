@@ -252,8 +252,9 @@ Need approval from higher ups.
 ## Project Structure
 
 There are three main popular react project structure patterns:
-- Filetype/component
-  - [example 1](https://survivejs.com/react/advanced-techniques/structuring-react-projects/)
+### Filetype/component
+
+- [example 1](https://survivejs.com/react/advanced-techniques/structuring-react-projects/)
 
 There is a lot of variety within this category but it is characterized by
 organizing files based on file type (i.e. components in components/ actions in
@@ -332,9 +333,10 @@ Separated by file type with flat components
   index.js
 '''
 
-- Feature/Pods
-  - [example 1](https://jaysoo.ca/2016/02/28/organizing-redux-application/)
-  - [example 2](http://engineering.kapost.com/2016/01/organizing-large-react-applications/https://jaysoo.ca/2016/02/28/organizing-redux-application/)
+### Feature/Pods
+
+- [example 1](https://jaysoo.ca/2016/02/28/organizing-redux-application/)
+- [example 2](http://engineering.kapost.com/2016/01/organizing-large-react-applications/https://jaysoo.ca/2016/02/28/organizing-redux-application/)
 
 This project structure is based on separating files by what feature or pods they
 are concerned with (i.e. authentication, comments, profiles)
@@ -355,9 +357,10 @@ app/
     ...
 '''
 
-- Domain/view/route
-  - [example 1](https://marmelab.com/blog/2015/12/17/react-directory-structure.html)
-  - [example 2](https://survivejs.com/react/advanced-techniques/structuring-react-projects/)
+### Domain/view/route
+
+- [example 1](https://marmelab.com/blog/2015/12/17/react-directory-structure.html)
+- [example 2](https://survivejs.com/react/advanced-techniques/structuring-react-projects/)
 
 This project structure can have some overlap with the feature structure but it
 is narrowly focused on splitting code into the views and routes that are used
@@ -378,7 +381,7 @@ app/
 '''
 
 #### Extra articles
-- https://medium.com/@msandin/strategies-for-organizing-code-2c9d690b6f33
+- (https://medium.com/@msandin/strategies-for-organizing-code-2c9d690b6f33)
 
 ## NPM or Yarn
 
