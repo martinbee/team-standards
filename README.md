@@ -132,7 +132,7 @@ const CommentList = ({ comments }) => {
 };
 ```
 
-#### Property initializers and fat arrow methods??
+#### Property initializers/arrow methods or es6 (for [reference](http://www.michalzalecki.com/react-components-and-class-properties/))
 
 No initializers or fat arrow methods
 ```javascript
@@ -250,6 +250,135 @@ Need approval from higher ups.
 ## Testing
 
 ## Project Structure
+
+There are three main popular react project structure patterns:
+- Filetype/component
+  - [example 1](https://survivejs.com/react/advanced-techniques/structuring-react-projects/)
+
+There is a lot of variety within this category but it is characterized by
+organizing files based on file type (i.e. components in components/ actions in
+actions/, etc.).
+
+#### Some code examples
+
+Separated by file type with component individual directories
+'''
+/src
+  /actions
+    /notifications.js
+  /components
+    /Header
+    /Notifications
+      /index.js
+  /containers
+    /Home
+    /Notifications
+      /index.js
+  /images
+    /logo.png
+  /reducers
+    /login.js
+    /notifications.js
+  /styles
+    /header.scss
+    /notifications.scss
+  /utils
+  index.js
+'''
+
+Separated by file type with css encapsulated
+'''
+/src
+  /actions
+    /notifications.js
+  /components
+    /Header
+    /Notifications
+      /index.js
+      /notifications.scss
+  /containers
+    /Home
+    /Notifications
+      /index.js
+  /images
+    /logo.png
+  /reducers
+    /login.js
+    /notifications.js
+  /utils
+  index.js
+'''
+
+Separated by file type with flat components
+'''
+/src
+  /actions
+    /notifications.js
+  /components
+    /Header.jsx
+    /Notifications.jsx
+  /containers
+    /Home
+    /Notifications
+      /index.js
+  /images
+    /logo.png
+  /reducers
+    /login.js
+    /notifications.js
+  /styles
+    notifications.scss
+  /utils
+  index.js
+'''
+
+- Feature/Pods
+  - [example 1](https://jaysoo.ca/2016/02/28/organizing-redux-application/)
+  - [example 2](http://engineering.kapost.com/2016/01/organizing-large-react-applications/https://jaysoo.ca/2016/02/28/organizing-redux-application/)
+
+This project structure is based on separating files by what feature or pods they
+are concerned with (i.e. authentication, comments, profiles)
+
+#### Some code examples
+
+Separates files by what feature or pod they are concerned with
+'''
+app/
+  app.jsx
+  authentication/
+    authenticationContainer.jsx
+    actions/
+    ...
+  comments/
+    commentsContainer.jsx
+    actions/
+    ...
+'''
+
+- Domain/view/route
+  - [example 1](https://marmelab.com/blog/2015/12/17/react-directory-structure.html)
+  - [example 2](https://survivejs.com/react/advanced-techniques/structuring-react-projects/)
+
+This project structure can have some overlap with the feature structure but it
+is narrowly focused on splitting code into the views and routes that are used
+
+#### Some code examples
+
+'''
+app/
+  app.jsx
+  authentication/
+    authenticationContainer.jsx
+    actions/
+    ...
+  comments/
+    commentsContainer.jsx
+    actions/
+    ...
+'''
+
+#### Extra articles
+- https://medium.com/@msandin/strategies-for-organizing-code-2c9d690b6f33
 
 ## NPM or Yarn
 
