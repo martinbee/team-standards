@@ -381,7 +381,7 @@ app/
 ```
 
 #### Extra articles
-- (https://medium.com/@msandin/strategies-for-organizing-code-2c9d690b6f33)
+- https://medium.com/@msandin/strategies-for-organizing-code-2c9d690b6f33
 
 ## NPM or Yarn
 
