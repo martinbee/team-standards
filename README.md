@@ -3,20 +3,133 @@
 ## React Code
 
 #### ES6 classes
+
+Pre es6 React.createClass ('this' is autobound)
 ```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
+import React from 'react';
+
+const Contacts = React.createClass({
+  getInitialState () {
+
+  },
+  propTypes: {
+
+  },
+  getDefaultProps() {
+
+  },
+  onChange() {
+
+  },
+  render() {
+  }
+});
+
+export default Contacts;
 ```
-#### Prefer stateless functional components when possible
+
+es6 React Class ('this' needs to be explicitly bound)
 ```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
+import React from 'react';
+
+class Contacts extends React.Component {
+  constructor() {
+    super();
+    this.state = {};
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange() {
+
+  }
+
+  render() {
+  }
+}
+
+Contacts.propTypes = {};
+
+Contacts.defaultProps = {};
+
+export default Contacts;
+```
+
+#### Prefer stateless functional components when possible
+
+Non-functional component without state
+```javascript
+import React, { PureComponent } from 'react';
+
+export default class Contacts extends PureComponent {
+  render() {
+    return <div>{this.props.thing}</div>;
+  }
+};
+```
+
+Stateless functional component
+```javascript
+import React from 'react';
+
+const Contacts = props => <div>{props.thing}</div>;
+
+export default Contacts;
 ```
 
 #### Use container/presentational component paradigm [Dan Abramov Article](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+
+Logic and presentation in one component
 ```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
+import React, { Component } from 'react';
+
+class CommentListContainer extends Component {
+  state = { comments: [] };
+
+  componentDidMount() {
+    fetchSomeComments(comments => this.setState({ comments }));
+  }
+
+  renderComments() {
+    return this.state.comments.map(({ body, author }) => <li>{body}—{author}</li>);
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.renderComments()}
+      </ul>
+    );
+  }
+}
+```
+
+Logic and presentation split into two components
+```javascript
+import React, { Component } from 'react';
+import CommentList from './CommentList';
+
+class CommentListContainer extends Component {
+  state = { comments: [] };
+
+  componentDidMount() {
+    fetchSomeComments(comments =>
+      this.setState({ comments: comments }));
+  }
+
+  render() {
+    return <CommentList comments={this.state.comments} />;
+  }
+}
+
+// New file
+import React from 'react';
+
+const CommentList = ({ comments }) => {
+  const renderComments = () => comments
+    .map(({ body, author }) => <li>{body}—{author}</li>);
+
+  return <ul>{renderComments()}</ul>;
+};
 ```
 
 #### Property initializers and fat arrow methods??
