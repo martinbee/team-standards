@@ -82,7 +82,7 @@ Logic and presentation in one component
 ```javascript
 import React, { Component } from 'react';
 
-class CommentListContainer extends Component {
+class CommentList extends Component {
   state = { comments: [] };
 
   componentDidMount() {
@@ -232,6 +232,8 @@ and contains some useful standards. So far the rules that I am disabling are:
 "spaced-comment": 0
 ```
 
+There are other [options](http://noeticforce.com/best-javascript-style-guide-for-maintainable-code) for style guides, including google's, node's, idiomatic, etc.
+
 Regardless of the standard we follow, if, while developing, we come across some
 rules that we think are ridiculous, we can discuss modifying/disabling them.
 
@@ -245,13 +247,80 @@ rules that we think are ridiculous, we can discuss modifying/disabling them.
 
 ...and tons more
 
-Need approval from higher ups.
+We need approval from higher ups <cough>Lance<cough>.
 
 ## Testing
+
+Good [article](http://amzotti.github.io/testing/2015/03/16/what-is-the-difference-between-a-test-runner-testing-framework-assertion-library-and-a-testing-plugin/) on testing software classification.
+
+#### Test Runners
+
+Setup testing environment and run the tests. Some frameworks have built in test
+runners.
+
+- [Karma](http://karma-runner.github.io/1.0/index.html)
+
+#### Testing Frameworks
+
+What runs inside the testing server. All the methods and language used to
+surround the assertion. Frameworks often include built in test running.
+
+As an example, below is a snippet of Mocha. Everything, besides the code inside
+the 'it' block comes from the testing framework. The code in the 'it' block
+belongs to the assertion library.
+
+```
+describe('the todo.App', function() {
+  context('the todo object', function(){
+
+    it('should have all the necessary methods', function(){
+      var msg = "method should exist";
+      expect(todo.util.trimTodoName, msg).to.exist;
+      expect(todo.util.isValidTodoName, msg).to.exist;
+      expect(todo.util.getUniqueId, msg).to.exist;
+    });
+  });
+});
+```
+
+- [Mocha](https://mochajs.org/)
+- [Jasmine](https://jasmine.github.io/)
+- [Jest](http://facebook.github.io/jest/)
+
+#### Assertion Libraries
+
+The assertion library is what actually runs the specs and determines whether any
+given condition is valid or not. Ultimately, every test is ran by methods which
+are derived from our assertion library. It is worth mentioning though, not every
+framework needs an external assertion library. In these cases there is a
+trade off between initial complexity and flexibility.
+
+- [Chai](http://chaijs.com/)
+- [Expect](https://github.com/mjackson/expect)
+- [Jasmine](https://jasmine.github.io/)
+- [Jest](http://facebook.github.io/jest/)
+
+#### React component testing
+
+- [Enzyme](https://github.com/airbnb/enzyme)
+- Test Utils
+
+#### Mocking support/Addons
+
+- [Sinon](http://sinonjs.org/)
+- [Jest](http://facebook.github.io/jest/)
+
+
+#### Common testing patterns
+
+- Karma, Mocha, Chai, Enzyme
+- Jest, Enzyme
+- Karma, Jasmine, Enzyme
 
 ## Project Structure
 
 There are three main popular react project structure patterns:
+
 ### Filetype/component
 
 - [example 1](https://survivejs.com/react/advanced-techniques/structuring-react-projects/)
