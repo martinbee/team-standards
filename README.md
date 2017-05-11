@@ -28,6 +28,8 @@ const Contacts = React.createClass({
 export default Contacts;
 ```
 
+------
+
 es6 React Class ('this' needs to be explicitly bound)
 ```javascript
 import React from 'react';
@@ -54,6 +56,8 @@ Contacts.defaultProps = {};
 export default Contacts;
 ```
 
+------
+
 #### Prefer stateless functional components when possible ([Benefits](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc))
 
 Non-functional component without state
@@ -75,6 +79,8 @@ const Contacts = props => <div>{props.thing}</div>;
 
 export default Contacts;
 ```
+
+------
 
 #### Use container/presentational component paradigm ([Dan Abramov Article](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0))
 
@@ -102,6 +108,8 @@ class CommentList extends Component {
   }
 }
 ```
+
+------
 
 Logic and presentation split into two components
 ```javascript
@@ -131,6 +139,8 @@ const CommentList = ({ comments }) => {
   return <ul>{renderComments()}</ul>;
 };
 ```
+
+------
 
 #### Property initializers/arrow methods or es6 (for [reference](http://www.michalzalecki.com/react-components-and-class-properties/))
 
@@ -179,6 +189,8 @@ Dropdown.defaultProps = {
 export default Dropdown;
 ```
 
+------
+
 With initializers and fat arrow methods
 ```javascript
 export default class Dropdown extends PureComponent {
@@ -214,6 +226,8 @@ export default class Dropdown extends PureComponent {
 }
 ```
 
+------
+
 ## Linting
 
 Many linting options are available. I recommend using [eslint](https://github.com/eslint/eslint) with [airbnb](https://github.com/airbnb/javascript) using [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb).
@@ -237,6 +251,8 @@ There are other [options](http://noeticforce.com/best-javascript-style-guide-for
 Regardless of the standard we follow, if, while developing, we come across some
 rules that we think are ridiculous, we can discuss modifying/disabling them.
 
+------
+
 ## CI
 
 [CircleCI](https://circleci.com/)
@@ -249,6 +265,8 @@ rules that we think are ridiculous, we can discuss modifying/disabling them.
 
 We need approval from higher ups <cough>Lance<cough>.
 
+------
+
 ## Testing
 
 Good [article](http://amzotti.github.io/testing/2015/03/16/what-is-the-difference-between-a-test-runner-testing-framework-assertion-library-and-a-testing-plugin/) on testing software classification.
@@ -259,6 +277,8 @@ Setup testing environment and run the tests. Some frameworks have built in test
 runners.
 
 - [Karma](http://karma-runner.github.io/1.0/index.html)
+
+------
 
 #### Testing Frameworks
 
@@ -287,6 +307,8 @@ describe('the todo.App', function() {
 - [Jasmine](https://jasmine.github.io/)
 - [Jest](http://facebook.github.io/jest/)
 
+------
+
 #### Assertion Libraries
 
 The assertion library is what actually runs the specs and determines whether any
@@ -300,16 +322,21 @@ trade off between initial complexity and flexibility.
 - [Jasmine](https://jasmine.github.io/)
 - [Jest](http://facebook.github.io/jest/)
 
+------
+
 #### React component testing
 
 - [Enzyme](https://github.com/airbnb/enzyme)
 - Test Utils
+
+------
 
 #### Mocking support/Addons
 
 - [Sinon](http://sinonjs.org/)
 - [Jest](http://facebook.github.io/jest/)
 
+------
 
 #### Common testing patterns
 
@@ -317,9 +344,13 @@ trade off between initial complexity and flexibility.
 - Jest, Enzyme
 - Karma, Jasmine, Enzyme
 
+------
+
 ## Project Structure
 
 There are three main popular react project structure patterns:
+
+------
 
 ### Filetype/component
 
@@ -356,6 +387,8 @@ Separated by file type with component individual directories
   index.js
 ```
 
+------
+
 Separated by file type with css encapsulated
 ```
 /src
@@ -379,6 +412,8 @@ Separated by file type with css encapsulated
   index.js
 ```
 
+------
+
 Separated by file type with flat components
 ```
 /src
@@ -401,6 +436,8 @@ Separated by file type with flat components
   /utils
   index.js
 ```
+
+------
 
 ### Feature/Pods
 
@@ -426,6 +463,8 @@ app/
     ...
 ```
 
+------
+
 ### Domain/view/route
 
 - [example 1](https://marmelab.com/blog/2015/12/17/react-directory-structure.html)
@@ -449,8 +488,12 @@ app/
     ...
 ```
 
+------
+
 #### Extra articles
 - https://medium.com/@msandin/strategies-for-organizing-code-2c9d690b6f33
+
+------
 
 ## NPM or Yarn
 
@@ -460,11 +503,15 @@ app/
 
 Security [concerns](http://blog.npmjs.org/post/141702881055/package-install-scripts-vulnerability) with NPM.
 
+------
+
 #### Use [semantic release](https://github.com/semantic-release/semantic-release)
 
 Instead of writing meaningless commit messages, we can take our time to think about the changes in the codebase and write them down. Following formalized conventions it is then possible to generate a helpful changelog and to derive the next semantic version number from them.
 
 When semantic-release is setup it will do that after every successful continuous integration build of your master branch (or any other branch you specify) and publish the new version for you. This way no human is directly involved in the release process and your releases are guaranteed to be unromantic and unsentimental.
+
+------
 
 ## Github Standards
 
@@ -477,6 +524,8 @@ reviewed, it will be merged or commented upon.
 - develop
 - feat/add-example or feature/add-example
 - fix/correct-example-bug
+
+------
 
 #### Commit messages relate to semantic release use [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md) standards
 
