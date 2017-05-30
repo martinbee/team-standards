@@ -138,6 +138,8 @@ const CommentList = ({ comments }) => {
 
   return <ul>{renderComments()}</ul>;
 };
+
+export default CommentList;
 ```
 
 ------
@@ -245,10 +247,10 @@ shouldComponentUpdate example for deep comparisons
 
 ```jsx
 import React, { Component } from 'react';
-import { arrayOf, shape, string, number } from 'prop-types';
-import { isEqual } from 'lodash';
 
-export default class ResultsListWrapper extends Component {
+import ResultsList from './ResultsList';
+
+export default class ResultsListContainer extends Component {
   state = { data: [] };
 
   componentWillMount() {
@@ -266,7 +268,12 @@ export default class ResultsListWrapper extends Component {
   }
 }
 
-class ResultsList extends Component {
+// new file
+import React, { Component } from 'react';
+import { arrayOf, shape, string, number } from 'prop-types';
+import { isEqual } from 'lodash';
+
+export default class ResultsList extends Component {
   static propTypes = {
     data: arrayof(
       shape({
