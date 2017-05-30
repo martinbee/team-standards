@@ -5,7 +5,7 @@
 #### ES6 classes vs React.createClass (article on differences: https://toddmotto.com/react-create-class-versus-component/)
 
 Pre es6 React.createClass ('this' is autobound)
-```javascript
+```jsx
 import React from 'react';
 
 const Contacts = React.createClass({
@@ -31,7 +31,7 @@ export default Contacts;
 ------
 
 es6 React Class ('this' needs to be explicitly bound)
-```javascript
+```jsx
 import React from 'react';
 
 class Contacts extends React.Component {
@@ -61,7 +61,7 @@ export default Contacts;
 #### Prefer stateless functional components when possible ([Benefits](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc))
 
 Non-functional component without state
-```javascript
+```jsx
 import React, { PureComponent } from 'react';
 
 export default class Contacts extends PureComponent {
@@ -72,7 +72,7 @@ export default class Contacts extends PureComponent {
 ```
 
 Stateless functional component
-```javascript
+```jsx
 import React from 'react';
 
 const Contacts = props => <div>{props.thing}</div>;
@@ -85,7 +85,7 @@ export default Contacts;
 #### Use container/presentational component paradigm ([Dan Abramov Article](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0))
 
 Logic and presentation in one component
-```javascript
+```jsx
 import React, { Component } from 'react';
 
 class CommentList extends Component {
@@ -112,7 +112,7 @@ class CommentList extends Component {
 ------
 
 Logic and presentation split into two components
-```javascript
+```jsx
 import React, { Component } from 'react';
 import CommentList from './CommentList';
 
@@ -145,7 +145,10 @@ const CommentList = ({ comments }) => {
 #### Property initializers/arrow methods or es6 (for [reference](http://www.michalzalecki.com/react-components-and-class-properties/))
 
 No initializers or fat arrow methods
-```javascript
+```jsx
+import React, { PureComponent } from 'react';
+import { arrayOf, func, string } from 'prop-types';
+
 class Dropdown extends PureComponent {
   constructor() {
     super();
@@ -192,7 +195,10 @@ export default Dropdown;
 ------
 
 With initializers and fat arrow methods
-```javascript
+```jsx
+import React, { PureComponent } from 'react';
+import { arrayOf, func, string } from 'prop-types';
+
 export default class Dropdown extends PureComponent {
   static propTypes = {
     selectableKeys: arrayOf(string),
@@ -222,6 +228,70 @@ export default class Dropdown extends PureComponent {
     ...
 
     return <Select />;
+  }
+}
+```
+
+------
+
+#### Performance Boosts (for [reference](https://facebook.github.io/react/docs/react-api.html#react.purecomponent))
+
+When dealing with complex components, avoid stateless functional components and
+instead use PureComponent or explicit shouldComponentUpdate checks. Be careful
+with PureComponent as it only diffs props shallowly, which, if used incorrectly,
+could lead to improper ui states/rendering.
+
+shouldComponentUpdate example for deep comparisons
+
+```jsx
+import React, { Component } from 'react';
+import { arrayOf, shape, string, number } from 'prop-types';
+import { isEqual } from 'lodash';
+
+export default class ResultsListWrapper extends Component {
+  state = { data: [] };
+
+  componentWillMount() {
+    this.getListDataOnAPoll();
+  }
+
+  getListDataOnAPoll() {
+    const data = getDataFromApi(urlExample, timerExample);
+
+    this.setState({ data });
+  }
+
+  render() {
+    return <ResultsList data={this.state.data} />;
+  }
+}
+
+class ResultsList extends Component {
+  static propTypes = {
+    data: arrayof(
+      shape({
+        id: string.isRequired,
+        total: number,
+      })
+    ),
+  };
+
+  shouldComponentUpdate(nextProps) {
+    const currentData = this.props.data;
+    const newData = nextProps.data;
+
+    // _.isEqual, lodash's isEqual performs a deep comparison between two values
+    if (isEqual(currentData, newData)) return false;
+  }
+
+  renderListItems() {
+    this.props.data.map(({ id, total }) => (
+      <li>Item with id {id} has a total of {total}</li>
+    );
+  }
+
+  render() {
+    return <ul>{this.renderListItems()}</ul>;
   }
 }
 ```
