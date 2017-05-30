@@ -289,12 +289,14 @@ export default class ResultsList extends Component {
 
     // _.isEqual, lodash's isEqual performs a deep comparison between two values
     if (isEqual(currentData, newData)) return false;
+
+    return true;
   }
 
   renderListItems() {
-    this.props.data.map(({ id, total }) => (
+    return this.props.data.map(({ id, total }) => (
       <li>Item with id {id} has a total of {total}</li>
-    );
+    ));
   }
 
   render() {
