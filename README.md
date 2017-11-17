@@ -33,8 +33,6 @@ const Contacts = React.createClass({
 export default Contacts;
 ```
 
-------
-
 es6 React Class ('this' needs to be explicitly bound)
 ```jsx
 import React from 'react';
@@ -113,8 +111,6 @@ class CommentList extends Component {
   }
 }
 ```
-
-------
 
 Logic and presentation split into two components
 ```jsx
@@ -197,8 +193,6 @@ Dropdown.defaultProps = {
 
 export default Dropdown;
 ```
-
-------
 
 With initializers and fat arrow methods
 ```jsx
@@ -299,8 +293,6 @@ export default class ExampleCheckbox extends Component {
 }
 ```
 
-------
-
 GOOD PRACTICE: only use arrow functions when `this` needs to be bound
 ```jsx
 import React, { Component } from 'react';
@@ -354,8 +346,6 @@ export default class ExampleCheckbox extends Component {
 }
 ```
 
-------
-
 Only using arrow methods for methods that absolutely need to be bound has
 several benefits:
 
@@ -367,6 +357,8 @@ several benefits:
     instance of a component will declare it's own version of that arrow method
     (to keep `this` bound correctly). This can lead to a performance hit if
     there a lot of a particular type of component.
+
+------
 
 ### Performance Boosts (for [reference](https://facebook.github.io/react/docs/react-api.html#react.purecomponent))
 
