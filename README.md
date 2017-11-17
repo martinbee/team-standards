@@ -2,7 +2,8 @@
 
 ## React Code
 
-#### ES6 classes vs React.createClass (article on differences: https://toddmotto.com/react-create-class-versus-component/)
+### ES6 classes vs React.createClass (article on differences: https://toddmotto.com/react-create-class-versus-component/)
+#### Even better, use property initializers and arrow methods (see below)
 
 Pre es6 React.createClass ('this' is autobound)
 ```jsx
@@ -12,15 +13,19 @@ const Contacts = React.createClass({
   getInitialState () {
 
   },
+
   propTypes: {
 
   },
+
   getDefaultProps() {
 
   },
+
   onChange() {
 
   },
+
   render() {
   }
 });
@@ -58,7 +63,7 @@ export default Contacts;
 
 ------
 
-#### Prefer stateless functional components when possible ([Benefits](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc))
+### Prefer stateless functional components when possible ([Benefits](https://hackernoon.com/react-stateless-functional-components-nine-wins-you-might-have-overlooked-997b0d933dbc))
 
 Non-functional component without state
 ```jsx
@@ -82,7 +87,7 @@ export default Contacts;
 
 ------
 
-#### Use container/presentational component paradigm ([Dan Abramov Article](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0))
+### Use container/presentational component paradigm ([Dan Abramov Article](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0))
 
 Logic and presentation in one component
 ```jsx
@@ -120,8 +125,7 @@ class CommentListContainer extends Component {
   state = { comments: [] };
 
   componentDidMount() {
-    fetchSomeComments(comments =>
-      this.setState({ comments: comments }));
+    fetchSomeComments(comments => this.setState({ comments }));
   }
 
   render() {
@@ -144,7 +148,7 @@ export default CommentList;
 
 ------
 
-#### Property initializers/arrow methods or es6 (for [reference](http://www.michalzalecki.com/react-components-and-class-properties/))
+### Property initializers/arrow methods or es6 (for [reference](http://www.michalzalecki.com/react-components-and-class-properties/))
 
 No initializers or fat arrow methods
 ```jsx
@@ -177,7 +181,7 @@ class Dropdown extends PureComponent {
   render() {
     ...
 
-    return <Select />;
+    return <Select onChange={this.onChange} />;
   }
 }
 
@@ -229,14 +233,142 @@ export default class Dropdown extends PureComponent {
   render() {
     ...
 
-    return <Select />;
+    return <Select onChange={this.onChange} />;
   }
 }
 ```
 
 ------
 
-#### Performance Boosts (for [reference](https://facebook.github.io/react/docs/react-api.html#react.purecomponent))
+#### An important note on arrow methods in React (for [reference](https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1))
+
+Arrow methods should only be used to explicitly bind methods to a component. If
+we are passing a method to another component (such as an onChange or onClick
+method to an input) and we're worried about keeping `this` pointing to the
+correct component, then use an arrow method. Otherwise, use a regular react
+method.
+
+BAD PRACTICE: using all arrow functions
+```jsx
+import React, { Component } from 'react';
+import {
+  string,
+  bool,
+} from 'prop-types';
+
+export default class ExampleCheckbox extends Component {
+  static propTypes = {
+    id: string.isRequired,
+    boldLabel: bool,
+  };
+
+  static defaultProps = {
+    boldLabel: false,
+  };
+
+  state = { checked: false };
+
+  onChange = event => this.setState({ checked: !this.state.checked });
+
+  getLabel = () => {
+    if (this.props.boldLabel) return <strong>Checkbox</strong>
+
+    return 'Checkbox';
+  }
+
+  render() {
+    // if used in more than one place, destructure property out (same for state)
+    const {
+      id,
+    } = this.props;
+
+    const inputProps = {
+      id,
+      checked: this.state.checked,
+      onChange: this.onChange,
+      type: 'checkbox',
+    };
+
+    return (
+      <div>
+        <label htmlFor={id}>{this.getLabel()}</label>
+        <input {...inputProps} />
+      </div>
+    );
+  }
+}
+```
+
+------
+
+GOOD PRACTICE: only use arrow functions when `this` needs to be bound
+```jsx
+import React, { Component } from 'react';
+import {
+  string,
+  bool,
+} from 'prop-types';
+
+export default class ExampleCheckbox extends Component {
+  static propTypes = {
+    id: string.isRequired,
+    boldLabel: bool,
+  };
+
+  static defaultProps = {
+    boldLabel: false,
+  };
+
+  state = { checked: false };
+
+  // onChange is an arrow function as it's passed and needs `this` to be bound
+  onChange = event => this.setState({ checked: !this.state.checked });
+
+  // getLabel is a regular method as it is not passed and is already bound
+  getLabel() {
+    if (this.props.boldLabel) return <strong>Checkbox</strong>
+
+    return 'Checkbox';
+  }
+
+  render() {
+    // if used in more than one place, destructure property out (same for state)
+    const {
+      id,
+    } = this.props;
+
+    const inputProps = {
+      id,
+      checked: this.state.checked,
+      onChange: this.onChange,
+      type: 'checkbox',
+    };
+
+    return (
+      <div>
+        <label htmlFor={id}>{this.getLabel()}</label>
+        <input {...inputProps} />
+      </div>
+    );
+  }
+}
+```
+
+------
+
+Only using arrow methods for methods that absolutely need to be bound has
+several benefits:
+
+- Our code is more explicit about which methods are called inside our component and
+  which methods are passed to other components.
+
+- Our code will be slightly more performant.
+  - Arrow methods are transpiled into the class constructor in es5, so each
+    instance of a component will declare it's own version of that arrow method
+    (to keep `this` bound correctly). This can lead to a performance hit if
+    there a lot of a particular type of component.
+
+### Performance Boosts (for [reference](https://facebook.github.io/react/docs/react-api.html#react.purecomponent))
 
 When dealing with complex components, avoid stateless functional components and
 instead use PureComponent or explicit shouldComponentUpdate checks. Be careful
@@ -350,7 +482,7 @@ We need approval from higher ups <cough>Lance<cough>.
 
 Good [article](http://amzotti.github.io/testing/2015/03/16/what-is-the-difference-between-a-test-runner-testing-framework-assertion-library-and-a-testing-plugin/) on testing software classification.
 
-#### Test Runners
+### Test Runners
 
 Setup testing environment and run the tests. Some frameworks have built in test
 runners.
@@ -359,7 +491,7 @@ runners.
 
 ------
 
-#### Testing Frameworks
+### Testing Frameworks
 
 What runs inside the testing server. All the methods and language used to
 surround the assertion. Frameworks often include built in test running.
@@ -388,7 +520,7 @@ describe('the todo.App', function() {
 
 ------
 
-#### Assertion Libraries
+### Assertion Libraries
 
 The assertion library is what actually runs the specs and determines whether any
 given condition is valid or not. Ultimately, every test is ran by methods which
@@ -403,21 +535,21 @@ trade off between initial complexity and flexibility.
 
 ------
 
-#### React component testing
+### React component testing
 
 - [Enzyme](https://github.com/airbnb/enzyme)
 - Test Utils
 
 ------
 
-#### Mocking support/Addons
+### Mocking support/Addons
 
 - [Sinon](http://sinonjs.org/)
 - [Jest](http://facebook.github.io/jest/)
 
 ------
 
-#### Common testing patterns
+### Common testing patterns
 
 - Karma, Mocha, Chai, Enzyme
 - Jest, Enzyme
@@ -584,7 +716,7 @@ Security [concerns](http://blog.npmjs.org/post/141702881055/package-install-scri
 
 ------
 
-#### Use [semantic release](https://github.com/semantic-release/semantic-release)
+### Use [semantic release](https://github.com/semantic-release/semantic-release)
 
 Instead of writing meaningless commit messages, we can take our time to think about the changes in the codebase and write them down. Following formalized conventions it is then possible to generate a helpful changelog and to derive the next semantic version number from them.
 
@@ -598,7 +730,7 @@ When working on a story, branch off of develop (using branch naming conventions)
 and then pull request that branch back into develop when done. After it is peer
 reviewed, it will be merged or commented upon.
 
-#### Branch naming
+### Branch naming
 - master
 - develop
 - feat/add-example or feature/add-example
@@ -606,7 +738,7 @@ reviewed, it will be merged or commented upon.
 
 ------
 
-#### Commit messages relate to semantic release use [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md) standards
+### Commit messages relate to semantic release use [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog/blob/v0.5.3/conventions/angular.md) standards
 
 Examples:
 
