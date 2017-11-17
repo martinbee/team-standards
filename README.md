@@ -354,7 +354,7 @@ several benefits:
 
 - Our code will be slightly more performant.
   - Arrow methods are transpiled into the class constructor in es5, so each
-    instance of a component will declare it's own version of that arrow method
+    instance of a component will declare its own version of that arrow method
     (to keep `this` bound correctly). This can lead to a performance hit if
     there a lot of a particular type of component.
 
