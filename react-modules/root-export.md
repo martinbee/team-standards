@@ -1,5 +1,18 @@
 ## You can export a group of components in a /components folder with a root export like below:
 
+./core/index.js example
+```
+import * as components from "./components"
+
+const constants = {
+  NAME: "core",
+}
+
+export { components }
+export default { components, constants }
+```
+
+./core/components/index.js example
 ```
 export { default as App } from "./App"
 export { default as Header } from "./Header"
@@ -9,7 +22,7 @@ export { default as LayoutStandard } from "./LayoutStandard"
 export { default as NotFound } from "./NotFound"
 ```
 
-And then you can import a whole section such as "core" in this example:
+And then you can import a whole section such as "core" and namespace to them as in this example:
 
 ```
 import { components as core } from "./core"
