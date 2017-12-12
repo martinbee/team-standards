@@ -2,16 +2,25 @@
 
 [Component Types](./component-types.md)
 
+
 [Navigation | If on page partials](./navigation/if-on-page.md)
+
 [Navigation | Programmatically Route](./navigation/programmatically-route.md)
+
 [Navigation | Standard Linking](./navigation/standard-linking.md)
+
 
 [React Modules](./react-modules/root-export.md)
 
+
 [React Router | App](./react-router/App.md)
+
 [React Router | index](./react-router/index.md)
+
 [React Router | LayoutEmpty](./react-router/LayoutEmpty.md)
+
 [React Router | routes](./react-router/routes.md)
+
 
 [Working with Dates](./dates.md)
 
