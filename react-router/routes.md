@@ -78,10 +78,6 @@ export default [
             name: "Search",
           },
           {
-            component: core.NotFound,
-            name: "Not Found",
-          },
-          {
             path: "/child/:id",
             component: pages.Home,
             routes: [
@@ -90,6 +86,10 @@ export default [
                 component: pages.Home,
               },
             ],
+          },
+          {
+            component: core.NotFound,
+            name: "Not Found",
           },
         ],
       },
