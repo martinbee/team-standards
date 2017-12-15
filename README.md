@@ -25,6 +25,11 @@
 [Working with Dates](./dates.md)
 
 
+[Declaring Props](./declaring-props/Declaring-props.md)
+
+[Destructuring Props](./destructuring-props/destructuring-props.md)
+
+
 ## React Code
 
 ### ES6 classes vs React.createClass (article on differences: https://toddmotto.com/react-create-class-versus-component/)
