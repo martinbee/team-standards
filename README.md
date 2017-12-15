@@ -25,7 +25,7 @@
 [Working with Dates](./dates.md)
 
 
-[Declaring Props](./declaring-props/declaring-props.md)
+[Declaring Props](./declaring-props/props.md)
 
 [Destructuring Props](./destructuring-props/destructuring-props.md)
 
